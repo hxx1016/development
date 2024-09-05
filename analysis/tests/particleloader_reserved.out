@@ -1,0 +1,16 @@
+[INFO] Steering file: analysis/tests/particleloader_reserved.py
+[INFO] The random number seed is set to "1337"
+[INFO] Starting event processing, random seed is set to '1337'
+[INFO] Added file ${BELLE2_SOFTWARE_DIR}/analysis/tests/mdst.root
+[INFO] ParticleLoader's Summary of Actions:
+[INFO]  o) creating (anti-)ParticleList with name: e+:all (e-:all)
+[INFO]    -> MDST source: Tracks
+[INFO] Conditions Database: found working metadata provider
+	provider = ${BELLE2_CONDB_METADATA}
+[INFO] Conditions data: configured globaltags (highest priority first) are release-05-01-03, Legacy_CollisionAxisCMS
+[INFO] Starting event processing, random seed is set to '1337'
+[INFO] Added file ${BELLE2_SOFTWARE_DIR}/analysis/tests/mdst.root
+[INFO] ParticleLoader's Summary of Actions:
+[INFO]  o) creating (anti-)ParticleList with name: e+:all (e-:all)
+[INFO]    -> MDST source: Tracks
+[FATAL] You have tried to create the list e+:all but the label 'all' is forbidden for user-defined lists of final-state particles. It could introduce *very* dangerous bugs.

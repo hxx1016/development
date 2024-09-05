@@ -1,0 +1,13 @@
+#vim: syntax=python
+
+Import('env')
+
+env['LIBS'] = [
+    'mdst_dataobjects', 
+    'framework', 
+    '$ROOT_LIBS', 
+    'boost_chrono', 
+    '$PYTHON_LIBS', 
+    ]
+
+Return('env')

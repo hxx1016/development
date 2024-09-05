@@ -1,0 +1,149 @@
+/* Style fixes */
+/* ----------- */
+
+/* Avoid having a too large admonition box, because the last child
+   adds bottom margin in addition to its mother */
+.admonition *:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* Disable rounded borders for all boxes, because it doesn't look nice when
+ * we stack them on top of each other */
+.admonition {
+    border-radius: 0px;
+}
+
+/* Getting things to toggle, e.g. for solution boxes */
+/* ------------------------------------------------- */
+
+.toggle {
+    padding: 12px;
+    line-height: 24px;
+    margin-bottom: 24px;
+}
+
+.toggle .admonition-title {
+    display: block;
+    clear: both;
+    cursor: pointer;
+}
+
+.toggle .admonition-title {
+    display: block;
+    clear: both;
+    /* Avoid that there is a bit of the box that will be expanded
+    later showing */
+    margin-bottom: -12px;
+}
+
+.toggle .admonition-title + * {
+    /* Since we set the admonition-title to have -12px margin, we need to
+    balance this for its first sibling here. */
+    margin-top: 24px;
+}
+
+.toggle .admonition-title:after {
+    content: " ▼";
+}
+
+.toggle .admonition-title.open:after {
+    content: " ▶";
+}
+
+
+/* Workaround for sidebar issues, especially together with toggle buttons:
+   If we place toggle admonition next to a sidebar, the layout will be messed
+   up. By adding this class to the admonition box (if it's an exercise-solution
+   pair, the exercise admonition), we enforce vertical space that pushes the
+   admonition after the sidebar.
+*/
+.clear {
+    clear: both;
+}
+
+
+/* Styling specific admonitions */
+/* ---------------------------- */
+
+.xhint .admonition-title, .solution .admonition-title{
+    background: #ffecf3;
+    color: inherit;
+    font-weight: inherit;
+}
+
+
+.xhint .admonition-title:before {
+    content: "  ";
+    width: 15px;
+    color: #F085B2;
+}
+
+.solution .admonition-title:before {
+    content: "  ";
+    width: 15px;
+    color: #F085B2;
+}
+
+
+.exercise, .solution, .xhint{
+    border-left-color: #F085B2;
+}
+
+.exercise .admonition-title{
+    background: #ffecf3;
+}
+
+
+.key-points .admonition-title{
+    background: #f7f0ff;
+}
+
+.key-points {
+    border-left-color: #9c9ff4;
+}
+
+.overview p, .overview ul, .overview blockquote {
+    margin-bottom: 5px;
+}
+
+
+.overview .admonition-title:before, .overview .sidebar-title:before {
+    content: "  ";
+    font-family: FontAwesome;
+    width: 15px;
+}
+
+.exercise .admonition-title:before {
+    content: "  ";
+    width: 15px;
+    color: #F085B2;
+}
+
+.key-points .admonition-title:before {
+    content: " ";
+    width: 15px;
+}
+
+/* Stacking boxes */
+/* -------------- */
+
+.stacked {
+    margin-bottom: -24px;
+}
+
+.stacked .admonition {
+    margin-bottom: -24px;
+}
+
+/* Textbox that looks like the ROOT TEve GUI */
+/* ----------------------------------------- */
+
+.gui-highlight-style {
+    color: black;
+    background-color: #e7e7e7; /* Grey */
+    border: none;
+    padding: 1px 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}

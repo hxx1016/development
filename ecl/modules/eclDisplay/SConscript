@@ -1,0 +1,5 @@
+Import('env')
+
+env['LIBS'] = ['Core', '$ROOT_LIBS', 'Gui', 'ecl_dataobjects', 'ecl_mapper', 'framework']
+
+Return('env')

@@ -1,0 +1,34 @@
+#!/usr/bin/env python
+
+Import('env')
+
+env['SUBLIB'] = True
+env['LIBS'] = ['framework', '$ROOT_LIBS']
+
+import subprocess
+import os
+
+identifier = 'unknown'
+reldir = os.environ.get('BELLE2_LOCAL_DIR', os.environ.get('BELLE2_ANALYSIS_DIR'))
+
+with open(os.devnull, 'w') as devnull:
+    # get commit id
+    proc = subprocess.Popen(['git', '-C', reldir, 'rev-parse', 'HEAD'], stdout=subprocess.PIPE, stderr=devnull)
+    identifier = proc.communicate()[0].strip().decode()
+
+    # if the current commit has a tag use it instead of the commit ID
+    proc = subprocess.Popen(['git', '-C', reldir, 'describe', '--exact'], stdout=subprocess.PIPE, stderr=devnull)
+    release_version = proc.communicate()[0].strip().decode()
+    if proc.returncode == 0:
+        identifier = release_version
+
+    # check for local modifications, ignoring untracked files
+    proc = subprocess.Popen(['git', '-C', reldir, 'status', '-uno', '--porcelain'], stdout=subprocess.PIPE, stderr=devnull)
+    changes = proc.communicate()[0].strip().decode()
+    if len(changes) != 0:
+        identifier += '-modified'
+
+env.Append(CPPDEFINES={'GIT_COMMITID': '\\"' + identifier + '\\"'})
+
+
+Return('env')

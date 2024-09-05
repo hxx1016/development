@@ -1,0 +1,78 @@
+/**************************************************************************
+ * basf2 (Belle II Analysis Software Framework)                           *
+ * Author: The Belle II Collaboration                                     *
+ *                                                                        *
+ * See git log for contributors and copyright holders.                    *
+ * This file is licensed under LGPL-3.0, see LICENSE.md.                  *
+ **************************************************************************/
+
+#pragma once
+
+#include <mdst/dataobjects/MCParticle.h>
+
+namespace Belle2 {
+
+  /** This struct is used by the TrackingPerformanceEvaluation Module to save information
+   * of reconstructed tracks
+   */
+  class MCParticleInfo {
+
+  public :
+
+    /// Constructor
+    MCParticleInfo(const MCParticle& the_mcParticle, const ROOT::Math::XYZVector& the_magField);
+
+    /// Getter for x component of momentum.
+    double getPx() { return m_mcParticle.getMomentum().x(); };
+    /// Getter for y component of momentum.
+    double getPy() { return m_mcParticle.getMomentum().y(); };
+    /// Getter for z component of momentum.
+    double getPz() { return m_mcParticle.getMomentum().z(); };
+    /// Getter for transverse momentum.
+    double getPt() { return m_mcParticle.getMomentum().Rho(); };
+    /// Getter for magnitut of momentum.
+    double getP() { return m_mcParticle.getMomentum().R(); };
+    /// Getter for energy.
+    double getEnergy() { return m_mcParticle.getEnergy(); };
+
+    /// Getter for x component of vertex.
+    double getX() { return m_mcParticle.getVertex().X(); };
+    /// Getter for y component of vertex.
+    double getY() { return m_mcParticle.getVertex().Y(); };
+    /// Getter for z component of vertex.
+    double getZ() { return m_mcParticle.getVertex().Z(); };
+
+    /// Getter for theta of momentum vector.
+    double getPtheta() { return m_mcParticle.getMomentum().Theta(); };
+    /// Getter for phi of momentum vector.
+    double getPphi() { return m_mcParticle.getMomentum().Phi(); };
+
+    /// Getter for electric charge of particle.
+    double getCharge() { return m_mcParticle.getCharge(); };
+
+    /// Getter for D0.
+    double getD0();
+    /// Getter for Z0.
+    double getZ0();
+    /// Getter for Phi.
+    double getPhi();
+    /// Getter for Omega.
+    double getOmega();
+    /// Getter for Theta.
+    double getCotTheta();
+    /// Getter for Lambda.
+    double getLambda();
+
+    /// Getter for Chi.
+    double getChi();
+
+  private:
+
+    /// Reference to MC particle.
+    const MCParticle& m_mcParticle;
+    /// Member variable for z component of B field.
+    double m_myBz;
+    /// Member variable for particle's electric charge.
+    double m_charge;
+  };
+}

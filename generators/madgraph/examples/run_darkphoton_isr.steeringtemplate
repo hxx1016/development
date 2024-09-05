@@ -1,0 +1,24 @@
+# These two parameters avoid a potential crash of MadGraph when too many resources are used
+set run_mode 2
+set nb_core 1
+
+import model MGMODEL
+generate MGGENERATE
+output MGOUTPUT
+
+launch
+MGRUNDCARD
+
+set ebeam1 MGBEAMENERGY
+set ebeam2 MGBEAMENERGY
+set nevents MGNEVENTS
+set lpp1 -3
+set lpp2 3
+set pdlabel isronlyll
+set iseed MGSEED
+
+set mAP MGPARAMETER_mAp
+set wAP MGPARAMETER_wAp
+set mDM MGPARAMETER_mDM
+set gDM MGPARAMETER_gDM
+set kappa MGPARAMETER_kappa

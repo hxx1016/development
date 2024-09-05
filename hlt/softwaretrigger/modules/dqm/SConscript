@@ -1,0 +1,17 @@
+# vim: syntax=python
+
+Import('env')
+
+env['LIBS'] = [
+    'framework',
+    '$ROOT_LIBS',
+    'mdst_dataobjects',
+    'mdst_dbobjects',
+    'hlt_softwaretrigger_dataobjects',
+    'hlt',
+    'klm_dataobjects',
+    'ecl_dataobjects'
+    ]
+
+Return('env')
+

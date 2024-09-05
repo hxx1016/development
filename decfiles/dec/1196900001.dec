@@ -1,0 +1,43 @@
+# EventType: 1196900001
+# Descriptor:  [B0 -> e+ tau-] cc
+# NickName: Bd_taue
+# Documentation: B0 -> e tau, LFV mode
+# Tested: Yes
+# PhysicsWG: SL
+# Responsible: Priyanka Cheema
+# Email: pche3675@uni.sydney.edu.au
+# Cuts: None
+# Date: 20230602
+#
+#
+# June 2021 Automated: Converted PYTHIA ids
+#   Automated conversion of all PYTHIA decay ids to Pythia 8 using conversion defined in evtgen/src/EvtGenExternal/EvtPythiaEngine.cpp
+
+
+#############################
+#                           #
+#    Decay of Upsilon(4S)   #
+#                           #
+#############################
+
+
+Decay Upsilon(4S)
+1.00         B0sig  anti-B0sig  B0  anti-B0         VSS_BMIX dm;
+Enddecay
+
+
+
+########################
+#                      #
+#    Decay of B0sig    #
+#                      #
+########################
+
+
+Decay B0sig
+1.00         e+  tau-                                PHOTOS PHSP;
+Enddecay
+CDecay anti-B0sig
+
+
+End
