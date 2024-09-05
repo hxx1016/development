@@ -6,7 +6,7 @@ using namespace Belle2;
 using namespace TrackFindingCDC;
 using namespace ROOT::Math;
 void gnntracking::readAndPrintTXT(int par) {
-    if (par==1){
+    if (par==0){
 
     /// Refer to https://github.com/belle2/basf2/blob/main/tracking/tests/recoTrack.cc
     const std::string m_storeArrayNameOfRecoTracks = "recoTracksFromGNN";
@@ -123,6 +123,8 @@ void gnntracking::readAndPrintTXT(int par) {
         std::cout << "Track fitting failed!" << std::endl;}   // output is "Track fitting failed!"
     }
 
+///##################################################################################################################################///	    
+	    
     else if (par == 1) {
       /// read data
     std::string fixedfilePath = "/sdufs/home/huxx/gitLab/basf2/development/tracking/trackFindingCDC/gnntracking/example/genfit6.txt";
@@ -231,115 +233,3 @@ void gnntracking::readAndPrintTXT(int par) {
 }
 
 
-// #include <tracking/trackFindingCDC/gnntracking/gnntracking.h>
-// #include <tracking/dataobjects/RecoTrack.h>
-// #include <memory>
-
-// using namespace Belle2;
-// using namespace TrackFindingCDC;
-// using namespace ROOT::Math;
-// void gnntracking::readAndPrintTXT() {
-//     /// read data
-//     std::string fixedfilePath = "/sdufs/home/huxx/gitLab/basf2/development/tracking/trackFindingCDC/gnntracking/example/genfit6.txt";
-//     std::ifstream file(fixedfilePath);
-//     if (!file.is_open()) {
-//         std::cerr << "无法打开文件: " << fixedfilePath << std::endl;
-//         return;
-//     } else {
-//         std::cout << "打开文件成功！文件名是 " << fixedfilePath << std::endl;
-//     }
-//     /// txt file description
-//     /// In one case, a single track passes through the gnn to remove the noise, leaving hits information
-//     /// ####################################################################
-//     /// First line ：
-//     /// seedPos.X , seedPos.Y , seedPos.Z , seedMom.X , seedMom.Y , seedMom.Z
-//     /// Next line ：
-//     /// tdcCount, adcCount, iSuperLayer, iLayer, iWire, driftLength, driftLengthVariance, chargeDeposit, driftTime
-//     /// Especially , adcCount, driftLength, driftLengthVariance, chargeDeposit, driftTime, these messages start with 0
-//     /// ####################################################################
-//     std::string line;
-//     std::vector<Belle2::TrackFindingCDC::CDCWireHit> bestElement2;
-//     XYZVector seedPos(0.0, 0.0, 0.0);
-//     XYZVector seedMom(0.0, 0.0, 0.0);
-//     int charge = 1;
-//     int pdg = 13;
-
-//     while (std::getline(file, line)) {
-//         std::istringstream ss(line);
-//         std::string item;
-//         std::vector<double> data;
-//         while (std::getline(ss, item, ',')) {
-//             data.push_back(std::stod(item));
-//         }
-//         if (data.size() == 9) {
-//             int tdcCount = data[0];
-//             int adcCount = data[1];
-//             int iSuperLayer = data[2];
-//             int iLayer = data[3];
-//             int iWire = data[4];
-//             int driftLength = data[5];
-//             int driftLengthVariance = data[6];
-//             int chargeDeposit = data[7];
-//             int driftTime = data[8];
-//             Belle2::CDCHit* cdchit = new Belle2::CDCHit(tdcCount, adcCount, iSuperLayer, iLayer, iWire);
-//             Belle2::TrackFindingCDC::CDCWireHit cdcWireHit(cdchit, driftLength, driftLengthVariance, chargeDeposit, driftTime);
-//             bestElement2.push_back(cdcWireHit);
-//         } else if (data.size() == 6) {
-//             seedPos.SetXYZ(data[0], data[1], data[2]);
-//             seedMom.SetXYZ(data[3], data[4], data[5]);
-//         } else {
-//             std::cout << "数据格式错误: " << line << std::endl;
-//         }
-//     }
-//     file.close();
-//     std::cout << "总共添加的CDCWireHits数目: " << bestElement2.size() << std::endl;
-
-//     Belle2::RecoTrack *newRecoTrack = new Belle2::RecoTrack(seedPos, seedMom, charge, "", "", "bestElement2", "", "", "");
-//     if (newRecoTrack) {
-//         std::cout << "RecoTrack创建成功！" << std::endl;
-//         std::cout << "种子位置: (" << seedPos.X() << ", " << seedPos.Y() << ", " << seedPos.Z() << ")" << std::endl;
-//         std::cout << "种子动量: (" << seedMom.X() << ", " << seedMom.Y() << ", " << seedMom.Z() << ")" << std::endl;
-//         std::cout << "电荷: " << charge << std::endl;
-//     } else {
-//         std::cerr << "RecoTrack创建失败！" << std::endl;
-//         return;
-//     }
-    
-//     Belle2::RecoTrackGenfitAccess *recoTrackGenfitAccess = new Belle2::RecoTrackGenfitAccess();    
-//     genfit::AbsTrackRep* RecoRep = recoTrackGenfitAccess->createOrReturnRKTrackRep(*newRecoTrack,pdg);
-//     if (RecoRep) {
-//         std::cout << "RecoRep 创建成功！" << std::endl;
-//     } else {
-//         std::cerr << "RecoRep 创建失败！" << std::endl;
-//         return;
-//     }   
-
-//     TVector3 seedPos1(seedPos.X(), seedPos.Y(), seedPos.Z());
-//     TVector3 seedMom1(seedMom.X(), seedMom.Y(), seedMom.Z());
-
-//     genfit::MeasuredStateOnPlane state(RecoRep);
-//     if (!RecoRep) {
-//     std::cerr << "Error: RecoRep creation failed!" << std::endl;
-//     return;
-//     } else {
-//     std::cout << "RecoRep creation successful." << std::endl;
-//     }
-
-//     RecoRep->setPosMom(state, seedPos1, seedMom1);
-
-//     genfit::Track* genfitTrackPtr =nullptr;
-//     if (recoTrackGenfitAccess) {
-//           std::cout << "recoTrackGenfitAccess exist" << std::endl;
-//           genfit::Track& genfitTrack = recoTrackGenfitAccess->getGenfitTrack(*newRecoTrack);
-//           genfitTrackPtr  = &genfitTrack;
-//         } else {
-//           std::cout << "recoTrackGenfitAccess not exist" << std::endl;
-//         }
-//     if (genfitTrackPtr != nullptr) {
-//         std::cout << "genfitTrackPtr exist" << std::endl;
-//     } else {
-//         std::cout << "genfitTrackPtr not exist" << std::endl;
-//       }
-//     genfit::AbsKalmanFitter* fitter = new genfit::KalmanFitterRefTrack();   
-//     fitter->processTrackWithRep(genfitTrackPtr, RecoRep, false);
-// }
