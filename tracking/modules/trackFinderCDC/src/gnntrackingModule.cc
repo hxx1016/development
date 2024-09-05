@@ -22,6 +22,7 @@ void gnntrackingModule::initialize() {
  
 void gnntrackingModule::event() {
         Module::event();
-        int par =1; //0:  ;1:   ;
+	// par=0 will run the first part of the code and par=1 will run the second part of the code
+	int par =0; 
 	m_gnntracking.readAndPrintTXT(par);
   }
