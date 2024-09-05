@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-#################################################################
+##########################################################################
 # basf2 (Belle II Analysis Software Framework)                           #
 # Author: The Belle II Collaboration                                     #
 #                                                                        #
@@ -47,6 +47,6 @@ main.add_module(progress)
 main.add_module(Gnntracking)
 # Process events
 process(main)
-print(111)
+print(successful)
 # Print call statistics
 #print(statistics)
